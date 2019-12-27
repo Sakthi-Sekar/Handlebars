@@ -1,0 +1,9 @@
+
+            From your Segment UI’s Destinations page click on “Add Destination”.
+             Search for “Evergage” within the Destinations Catalog and confirm the Source you’d like to connect
+                to.
+           Enter your Evergage Account Key (this is the subdomain you use to login to Evergage with; if your
+                account is “testaccount.evergage.com”, then use “testaccount”);
+             Finally, enter the name of the Evergage Dataset you want data to flow to (by default this is
+                “engage”);
+        

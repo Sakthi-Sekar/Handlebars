@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="normalise.css">
+    <link rel="stylesheet" type="text/css" href="grid.css">
+
+</head>
+
+<body onload="document.getElementById('defaultOpen').click();">
+    <script id="my_template" type="text/x-handlebars-template">
+
+
+    <h1>{{title title}}</h1>
+    <h2>{{subtitle}}</h2>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, '{{tab1}}',loadText('{{link1}}','gettingstarted'))" id="defaultOpen">{{tab1}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab2}}',loadText('{{link2}}','concepts'))">{{tab2}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab3}}',loadText('{{link3}}','toolsandplugins'))">{{tab3}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab4}}',loadText('{{link4}}','troubleshooting'))">{{tab4}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab5}}',loadText('{{link5}}','documenthistory'))">{{tab5}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab6}}',loadText('{{link6}}','guides'))">{{tab6}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab7}}',loadText('{{link7}}','testactions'))">{{tab7}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab8}}',loadText('{{link8}}','faq'))">{{tab8}}</button>
+        <button class="tablinks" onclick="openTab(event, '{{tab9}}',loadText('{{link9}}','aboutus'))">{{tab9}}</button>
+    </div>
+  
+<div class="container">
+    {{#content}}
+    <div id="Getting Started" class="tabcontent">
+        <h3>{{tab1}}</h3>
+        <p id="gettingstarted"></p>
+    </div>
+
+    <div id="Concepts" class="tabcontent">
+        <h3>{{tab2}}</h3>
+        <p id="concepts"></p>
+    </div>
+
+    <div id="Tools and Plugins" class="tabcontent">
+        <h3>{{tab3}}</h3>
+        <p id="toolsandplugins"></p>
+    </div>
+    <div id="Troubleshooting" class="tabcontent">
+        <h3>{{tab4}}</h3>
+        <p id="troubleshooting"></p>
+    </div>
+    <div id="Document History" class="tabcontent">
+        <h3>{{tab5}}</h3>
+        <p id="documenthistory"></p>
+    </div>
+    <div id="Guides" class="tabcontent">
+        <h3>{{tab6}}</h3>
+        <p id="guides"></p>
+    </div>
+    <div id="Test Actions" class="tabcontent">
+        <h3>{{tab7}}</h3>
+        <p id="testactions"></p>
+    </div>
+    <div id="FAQ" class="tabcontent">
+        <h3>{{tab8}}</h3>
+        <p id="faq"></p>
+    </div>
+    <div id="About Us" class="tabcontent">
+        <h3>{{tab9}}</h3>
+        <p id="aboutus"></p>
+    </div>
+     
+
+</div>
+
+{{/content}}
+    
+</script>
+    <div id="my_panel"></div>
+    <script>
+        /*--Tab creation according to the size--*/
+        function openTab(evt, docData) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(docData).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+    </script>
+    <script>
+        $(function () {
+            //json data for handlebar template
+            $.getJSON('content.json', function (data) {
+                //handlebar template html
+                var template = $("#my_template").html();
+                //handlebar's compile method returns special function which can be used to get final html
+                var compiledCode = Handlebars.compile(template);
+                //json data is passed top compiled code and result will be html
+                var result = compiledCode(data);
+                //compiled html can be rendered in document
+                $("#my_panel").html(result);
+            });
+        });
+
+    </script>
+
+    <script>
+        async function loadText(path, parameterID) {
+            text = await fetch(path);
+            document.getElementById(parameterID).innerText = await text.text();
+        }
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+
+*We seek to understand the gap between the hottest trends in testing and what teams are actually doing.
+This survey is open to all engineering roles - from dev to testing/QA, from ops to product management - any role that touches software quality.
+Please share your experience by taking the survey.*

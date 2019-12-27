@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery Add Number While Mouse Move</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+           function loadUser(){
+            var template = $('#template').html();
+            Mustache.parse(template);   // optional, speeds up future uses
+            var rendered = Mustache.render(template, { name: "Luke" });
+            $('#target').html(rendered);
+        }
+    </script>
+</head>
+
+<body onload="loadUser()">
+    <script id="template" type="x-tmpl-mustache">
+    Hello {{ name }}!
+
+    </script>
+    <script>
+    
+    </script>
+</body>
+
+</html>

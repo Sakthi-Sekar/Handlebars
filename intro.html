@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <section data-markdown>
+        <script id="my_template" type="text/template">
+        {{#content}}
+        <h1>{{title}}</h1>
+        <h2>{{subtitle}}</h2>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, {{tab1}},loadText({{link1}},'Gettingstarted'))" id="defaultOpen">{{tab1}}</button>
+            <button class="tablinks" onclick="openTab(event, {{tab2}},loadText({{link2}},'Concepts'))">{{tab2}}</button>
+            <button class="tablinks" onclick="openTab(event, {{tab3}},loadText({{link3}},'Tools and Plugins'))">{{tab3}}</button>
+        </div>
+        <div class="container">
+            <div id="Getting Started" class="tabcontent">
+                <h3>{{tab1}}</h3>
+                <p id="Gettingstarted"></p>
+         
+            </div>
+            <div id="Concepts" class="tabcontent">
+                <h3>{{tab2}}</h3>
+                <iframe src={{link2}}></iframe>
+            </div>
+        
+            <div id="Tools and Plugins" class="tabcontent">
+                <h3>{{tab3}}</h3>
+                <iframe src={{link3}}></iframe>
+            </div>
+                {{/content}}
+            </div>
+            </script>
+    </section>
+
+    <div id="mypanel"></div>
+
+    <script>
+        $(function () {
+            $.getJSON('content.json', function (data) {
+                var template = $("#my_template").html();
+                var text = Mustache.render(template, data);
+                $("#mypanel").html(text);
+            });
+        });
+
+    </script>
+</body>
+
+</html>

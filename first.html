@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <script id="my_template" type="text/template">
+
+{{#content}}
+    <h1>{{title}}</h1>
+    <h2>{{subtitle}}</h2>
+  
+<div class="container">
+    <div id="Getting Started" class="tabcontent">
+        <h3>{{tab1}}</h3>
+        <iframe src={{link1}}></iframe>
+    </div>
+
+    <div id="Concepts" class="tabcontent">
+        <h3>{{tab2}}</h3>
+        <iframe src={{link2}}></iframe>
+    </div>
+
+    <div id="Tools and Plugins" class="tabcontent">
+        <h3>{{tab3}}</h3>
+        <iframe src={{link3}}></iframe>
+    </div>
+    <div id="Troubleshooting" class="tabcontent">
+        <h3>{{tab4}}</h3>
+        <iframe src={{link4}}></iframe>
+    </div>
+    <div id="Document History" class="tabcontent">
+        <h3>{{tab5}}</h3>
+        <iframe src={{link5}}></iframe>
+    </div>
+    <div id="Guides" class="tabcontent">
+        <h3>{{tab6}}</h3>
+        <iframe src={{link6}}></iframe>
+    </div>
+    <div id="Test Actions" class="tabcontent">
+        <h3>{{tab7}}</h3>
+        <iframe src={{link7}}></iframe>
+    </div>
+    <div id="FAQ" class="tabcontent">
+        <h3>{{tab8}}</h3>
+        <iframe src={{link8}}></iframe>
+    </div>
+    <div id="About Us" class="tabcontent">
+        <h3>{{tab9}}</h3>
+        <iframe src={{link9}}></iframe>
+    </div>
+    {{/content}} 
+</div>
+</script>
+    <nav id="nav"></nav>
+    <script id="nav-template" type="text/x-handlebars-template">
+        <ul class="nav">
+{{#each navigation}}
+<li><a href={{link1}}>{{tab1}}</a></li>
+{{/each}}
+</ul>
+</script>
+    </nav>
+    </script>
+    <div id="mypanel"></div>
+    <script>
+        $(function () {
+            $.getJSON('first.json', function (data) {
+                var template = $("#my_template").html();
+                var text = Mustache.render(template, data);
+                var temp = Handlebars.compile($("#nav-template").html());
+                $('#nav').html(template(data));
+                $("#mypanel").html(text);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
